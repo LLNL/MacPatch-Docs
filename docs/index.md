@@ -1,4 +1,4 @@
-# ![MPLogo](images/mp_3_icon_64.png)  MacPatch v3.1
+# ![MPLogo](./images/mp_3_icon_64.png)  MacPatch v3.1
 
 ## Overview
 MacPatch simplifies the act of patching and installing software on Mac OS X based systems. The client relies on using the built-in software update application for patching the Mac OS X system updates and it's own scan and patch engine for custom patches.

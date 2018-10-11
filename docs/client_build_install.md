@@ -40,7 +40,7 @@ When uploading a new agent it's recommended that you QA the agent first by compi
 
 To build it locally with the server settings go to Preferences and select "Do not upload package".
 
-![](Images/docs/AgentUploader-Prefs.png)
+![](./images/docs/AgentUploader-Prefs.png)
 
 The agent uploader only has a few options. Here is a list and their definitions
 
@@ -55,4 +55,4 @@ The agent uploader only has a few options. Here is a list and their definitions
 |OS Config Profiles| Directory containing macOS config profiles to get installed with the agent. I use this for intermediate certificates.| Optional |
 |Registration key| Registration key to register the client with the MacPatch server. This feature is optional if using Auto registration.| Optional |
 
-![](Images/docs/AgentUploader.png)
+![](./images/docs/AgentUploader.png)

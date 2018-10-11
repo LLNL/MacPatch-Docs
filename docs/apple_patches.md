@@ -3,17 +3,17 @@
 
 **Example - Apple patch in `Create` state**
 
-[![](images/content/apple1.png)](images/content/apple1.png)
+[![](./images/content/apple1.png)](./images/content/apple1.png)
 
 #### Extending an Apple Patch <a name='a2'></a>
 
 MacPatch offers the ability to enhance and extend apple supplied patches. MacPatch offers the ability to change the order in which the patch is installed. This is done with the "Patch Install Weight"; the lower the number the sooner the install. By default custom patches have an install weight of 30 and apple patches have an install weight of 60. You also have the ability to override the reboot setting as well. For example if you have an apple patch that does not require a reboot you can change it so it does and vice versa.
 
-[![](images/content/apple2.png)](images/content/apple2.png)
+[![](./images/content/apple2.png)](./images/content/apple2.png)
 
 The final option to extending an apple patch is being able to assign and pre and post install script.
 
-[![](images/content/apple3.png)](images/content/apple3.png)
+[![](./images/content/apple3.png)](./images/content/apple3.png)
 
 ### Testing Patch Content <a name='a3'></a>
 
