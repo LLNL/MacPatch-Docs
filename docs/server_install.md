@@ -29,11 +29,11 @@ root or sudo access will be needed to perform these tasks.
 		- RHEL 7.x or CentOS 7.x
 		- Ubuntu Server 16.04
 - RAM: 4 Gig min
-- MySQL (5.6.x is Recommended)
+- MySQL (5.7.x is Recommended)
 	- 	MySQL 8 not tested.
 
 #### Perquisites <a name='a2'></a>
-- Install MySQL 5.6.x (must have root password)
+- Install MySQL 5.7.x (must have root password)
 - If Installing on Mac OS X, **Xcode and command line developer tools** need to be installed **AND** the license agreement needs to have been accepted.
 
 ##### Linux Packages <a name='a2a'></a>
@@ -53,7 +53,7 @@ RedHat & CentOS will require the "Development tools" group install. This group h
 
 ##### MySQL <a name='a2b'></a>
 
-While MySQL 5.6 is still the recommended database version. MySQL 5.7 has been out for some time now. MySQL changed the sql_mode settings in 5.7 which broke some queries in MacPatch. In order to use MacPatch with MySQL 5.7 the **sql\_mode** setting will have to be changed.
+MySQL changed the sql_mode settings in 5.7 which broke some queries in MacPatch. In order to use MacPatch with MySQL 5.7 the **sql\_mode** setting will have to be changed.
 
 To view and set the config use
 
@@ -106,7 +106,7 @@ Please remeber the passwords for mpdbadm and mpdbro accounts while running this 
 ##### Configure MacPatch schema & populate default data <a name='a3f'></a>
 
 		cd /opt/MacPatch/Server/apps
-		source env/bin/activate
+		source ../env/api/bin/activate
 		./mpapi.py db upgrade head
 		./mpapi.py populate_db
 		deactivate

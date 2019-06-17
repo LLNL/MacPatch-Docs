@@ -1,5 +1,5 @@
 ### Description
-This document will walk you through the build and upload of the MacPatch 3.1.x client agent.
+This document will walk you through the build and upload of the MacPatch 3.3.x client agent.
 
 When cloning the MacPatch software from GitHub includes the latest version of the client agent software. All of the bnaries are signed as part of this process. This compiled agent can be uploaded to the MacPatch server as is. If you wish to build and compile your own client agent, this is fully supported as well.
 
@@ -12,7 +12,7 @@ When cloning the MacPatch software from GitHub includes the latest version of th
 ### Requirements <a name='a1'></a>
 - Operating System:
 	- macOS
-		- Mac OS X 10.10 or higher
+		- Mac OS X 10.12 or higher
 - Xcode.app and command line developer tools
 	- the license agreement needs to have been accepted.
 
@@ -23,12 +23,12 @@ The script will ask a few questions in regards to building the client installer 
 
 **Note:** Please use the Mac Developer certificate to sign your binaries.
 
-Once completed the script will open the directory containing the zipped PKG installer of the MacPatch client. The directory is `/private/tmp/MP/Client31`.
+Once completed the script will open the directory containing the zipped PKG installer of the MacPatch client. The directory is `/private/tmp/MP/Client32`.
 
 
 ### Upload Client Software <a name='a6'></a>
 
-Uploading the client agent is a fairly simple process. Either you will upload the `MPClientInstall.pkg.zip` from `/opt/MacPatch/Source/Agent` or from `/private/tmp/MP/Client31`, if you have compiled the agent your self.
+Uploading the client agent is a fairly simple process. Either you will upload the `MPClientInstall.pkg.zip` from `/opt/MacPatch/Source/Agent` or from `/private/tmp/MP/Client32`, if you have compiled the agent your self.
 
 To get the agent uploader application you can login to the agent console and download it from `Admin-> Client Agents -> Deploy` or `/opt/MacPatch/Server/conf/Content/Web/tools/MPAgentUploader.zip`.
 
