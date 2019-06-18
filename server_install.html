@@ -237,14 +237,14 @@
 </ul>
 </li>
 <li>RAM: 4 Gig min</li>
-<li>MySQL (5.6.x is Recommended)<ul>
+<li>MySQL (5.7.x is Recommended)<ul>
 <li>MySQL 8 not tested.</li>
 </ul>
 </li>
 </ul>
 <h4 id="perquisites">Perquisites <a name='a2'></a></h4>
 <ul>
-<li>Install MySQL 5.6.x (must have root password)</li>
+<li>Install MySQL 5.7.x (must have root password)</li>
 <li>If Installing on Mac OS X, <strong>Xcode and command line developer tools</strong> need to be installed <strong>AND</strong> the license agreement needs to have been accepted.</li>
 </ul>
 <h5 id="linux-packages">Linux Packages <a name='a2a'></a></h5>
@@ -258,7 +258,7 @@ yum install epel-release
 <pre><code>apt-get install build-essential
 </code></pre>
 <h5 id="mysql">MySQL <a name='a2b'></a></h5>
-<p>While MySQL 5.6 is still the recommended database version. MySQL 5.7 has been out for some time now. MySQL changed the sql_mode settings in 5.7 which broke some queries in MacPatch. In order to use MacPatch with MySQL 5.7 the <strong>sql_mode</strong> setting will have to be changed.</p>
+<p>MySQL changed the sql_mode settings in 5.7 which broke some queries in MacPatch. In order to use MacPatch with MySQL 5.7 the <strong>sql_mode</strong> setting will have to be changed.</p>
 <p>To view and set the config use</p>
 <pre><code>SELECT @@GLOBAL.sql_mode;
 SET GLOBAL sql_mode = 'modes';
@@ -296,7 +296,7 @@ SET GLOBAL sql_mode = 'modes';
 </code></pre>
 <h5 id="configure-macpatch-schema-populate-default-data">Configure MacPatch schema &amp; populate default data <a name='a3f'></a></h5>
 <pre><code>    cd /opt/MacPatch/Server/apps
-    source env/bin/activate
+    source ../env/api/bin/activate
     ./mpapi.py db upgrade head
     ./mpapi.py populate_db
     deactivate
