@@ -24,10 +24,11 @@ root or sudo access will be needed to perform these tasks.
 #### Requirements <a name='a1'></a>
 - Operating System:
 	- macOS
-		- Mac OS X 10.10 or higher
+		- Mac OS X 10.12 or higher
 	- Linux
 		- RHEL 7.x or CentOS 7.x
-		- Ubuntu Server 16.04
+		- Ubuntu Server 18.04
+		- Ubuntu Server 16.04 (Must install pyton 3.6 seperatly and make it the default)
 - RAM: 4 Gig min
 - MySQL (5.7.x is Recommended)
 	- 	MySQL 8 not tested.
