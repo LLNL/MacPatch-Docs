@@ -160,30 +160,30 @@
                 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
 <li><a href="#table-of-contents">Table of Contents</a><ul>
-<li><a href="#prequisits--requirements">Prequisits &amp; Requirements</a><ul>
+<li><a href="#prequisits--requirements">Prequisits \&amp; Requirements</a><ul>
 <li><a href="#requirements-">Requirements </a></li>
-<li><a href="#perquisites-">Perquisites </a></li>
+<li><a href="#perquisites-">Perquisites </a><ul>
 <li><a href="#linux-packages-">Linux Packages </a></li>
 </ul>
 </li>
-<li><a href="#download-setup-and-install-">Download, Setup and Install </a><ul>
-<li><a href="#get-software-">Get Software </a></li>
-<li><a href="#install-software-">Install Software </a></li>
-<li><a href="#setup-database-">Setup Database </a></li>
-<li><a href="#configure-server-software-">Configure Server Software </a></li>
-<li><a href="#configure-macpatch-schema--populate-default-data-">Configure MacPatch schema \&amp; populate default data </a></li>
-<li><a href="#start-configured-services">Start Configured Services</a></li>
-<li><a href="#stop-configured-services">Stop Configured Services</a></li>
 </ul>
 </li>
-<li><a href="#server-setup--configuration-">Server Setup &amp; Configuration </a><ul>
+<li><a href="#download-setup-and-install-">Download, Setup and Install </a>
+        - <a href="#get-software-">Get Software </a>
+        - <a href="#install-software-">Install Software </a>
+        - <a href="#setup-database-">Setup Database </a>
+        - <a href="#configure-server-software-">Configure Server Software </a>
+        - <a href="#configure-macpatch-schema--populate-default-data-">Configure MacPatch schema \&amp; populate default data </a>
+        - <a href="#start-configured-services">Start Configured Services</a>
+        - <a href="#stop-configured-services">Stop Configured Services</a></li>
+<li><a href="#server-setup--configuration-">Server Setup \&amp; Configuration </a><ul>
 <li><a href="#first-login-">First Login </a></li>
 <li><a href="#server-configuration-">Server Configuration </a></li>
 <li><a href="#default-patch-group-configuration-">Default Patch Group Configuration </a></li>
 <li><a href="#client-agent-configuration-">Client Agent Configuration </a></li>
 </ul>
 </li>
-<li><a href="#download--add-patch-content-">Download &amp; Add Patch Content </a></li>
+<li><a href="#download--add-patch-content-">Download \&amp; Add Patch Content </a></li>
 </ul>
 </li>
 </ul>
@@ -247,12 +247,12 @@ dnf install epel-release pcre-devel swig
 </code></pre>
 <h5 id="configure-macpatch-schema-populate-default-data">Configure MacPatch schema &amp; populate default data <a name='a3f'></a></h5>
 <pre><code>    cd /opt/MacPatch/Server/apps
-    source ../env/api/bin/activate
-    ./mpapi.py db upgrade head
-    ./mpapi.py populate_db
+    source ../env/console/bin/activate
+    flask db upgrade head
+    /opt/MacPatch/Server/apps/mpsetup.py --populate-db
     deactivate
 </code></pre>
-<p><strong>Note:</strong> If "mpapi.py db upgrade head" is done using a root shell. Please delete the "/opt/MacPatch/Server/logs/mpwsapi.log" file. It will be owned by root and the REST api will not launch.</p>
+<p><strong>Note:</strong> If "flask db upgrade head" is done using a root shell. Please delete the "/opt/MacPatch/Server/logs/mpconsole.log" file. It will be owned by root and the REST api will not launch.</p>
 <h5 id="start-configured-services">Start Configured Services</h5>
 <pre><code>    cd /opt/MacPatch/Server/conf/scripts/setup
     sudo ./ServerSetup.py --service All --action start
