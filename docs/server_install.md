@@ -1,22 +1,23 @@
 ## Table of Contents
-* [Required Software](#a1)
-* [Perquisites](#a2)
-	* [Linux Packages](#a2a)
-	* [MySQL](#a2b)
-* [Download, Setup and Install](#a3)
-	* [Get Software](#a3a)
-	* [Install Server Software](#a3c)
-	* [Setup Database](#a3b)
-	* [Configure Server Software](#a3d)
-	* [Load and Populate Database](#a3f)
-* [Server Setup & Configuration](#a4)
-	* [First Login](#a4a)
-	* [Server Configuration](#a4b)
-	* [Default Patch Group Configuration](#a4c)
-	* [Client Agent Configuration](#a4d)
-* [Download and Add Patch Content](#a5)
-	* [Apple Patches](#a5a)
-	* [Custom Patches](#a5b)
+- [Table of Contents](#table-of-contents)
+	- [Prequisits \& Requirements](#prequisits--requirements)
+		- [Requirements ](#requirements-)
+		- [Perquisites ](#perquisites-)
+			- [Linux Packages ](#linux-packages-)
+	- [Download, Setup and Install ](#download-setup-and-install-)
+			- [Get Software ](#get-software-)
+			- [Install Software ](#install-software-)
+			- [Setup Database ](#setup-database-)
+			- [Configure Server Software ](#configure-server-software-)
+			- [Configure MacPatch schema \& populate default data ](#configure-macpatch-schema--populate-default-data-)
+			- [Start Configured Services](#start-configured-services)
+			- [Stop Configured Services](#stop-configured-services)
+	- [Server Setup \& Configuration ](#server-setup--configuration-)
+		- [First Login ](#first-login-)
+		- [Server Configuration ](#server-configuration-)
+		- [Default Patch Group Configuration ](#default-patch-group-configuration-)
+		- [Client Agent Configuration ](#client-agent-configuration-)
+	- [Download \& Add Patch Content ](#download--add-patch-content-)
 
 ### Prequisits & Requirements
 root or sudo access will be needed to perform these tasks.
@@ -24,18 +25,18 @@ root or sudo access will be needed to perform these tasks.
 #### Requirements <a name='a1'></a>
 - Operating System:
 	- macOS
-		- Mac OS X 10.12 or higher
+		- Mac OS X 10.15 or higher
 	- Linux
-		- RHEL 7.x or CentOS 7.x
-		- Ubuntu Server 18.04
-		- Ubuntu Server 16.04 (Must install pyton 3.6 seperatly and make it the default)
+		- RHEL 8.x or higher
+		- Ubuntu Server 18.04 (No longer being tested)
+- Pyhton 3.12 or higher
 - RAM: 4 Gig min
-- MySQL (5.7.x is Recommended)
-	- 	MySQL 8 not tested.
+- MySQL 8.0.20 or higher
 
 #### Perquisites <a name='a2'></a>
-- Install MySQL 5.7.x (must have root password)
+- MySQL installed (must have root password)
 - If Installing on Mac OS X, **Xcode and command line developer tools** need to be installed **AND** the license agreement needs to have been accepted.
+- Python 3.12 installed, if compiling please ensure libffi-devel is installed prior to compiling python.
 
 ##### Linux Packages <a name='a2a'></a>
 
@@ -45,31 +46,12 @@ The MacPatch server build script will attempt to install a number of required so
 
 RedHat & CentOS will require the "Development tools" group install. This group has a number of packages needed to build the MacPatch server.
 
-	yum groupinstall "Development tools"
-	yum install epel-release
+	dnf groupinstall "Development tools"
+	dnf install epel-release pcre-devel swig
 
 **Ubuntu**
 
 	apt-get install build-essential
-
-##### MySQL <a name='a2b'></a>
-
-MySQL changed the sql_mode settings in 5.7 which broke some queries in MacPatch. In order to use MacPatch with MySQL 5.7 the **sql\_mode** setting will have to be changed.
-
-To view and set the config use
-
-	SELECT @@GLOBAL.sql_mode;
-	SET GLOBAL sql_mode = 'modes';
-
-The default SQL mode in MySQL 5.7 includes these modes:
-
-	ONLY_FULL_GROUP_BY, STRICT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO, NO_AUTO_CREATE_USER, and NO_ENGINE_SUBSTITUTION.
-
-The default SQL mode in MySQL 5.6 includes this mode:
-
-	NO_ENGINE_SUBSTITUTION
-
-Preliminary testing has been successful when removing the **ONLY\_FULL\_GROUP\_BY** mode.
 
 ### Download, Setup and Install <a name='a3'></a>
 
@@ -84,20 +66,18 @@ Preliminary testing has been successful when removing the **ONLY\_FULL\_GROUP\_B
 		cd /opt/MacPatch/Scripts
 		sudo ./MPBuildServer.sh
 
-**Note:** If your behind a SSL content inspector add the custom ca using
-
-		export PIP_CERT=/path/to/ca/cert.crt
-
 ##### Setup Database <a name='a3b'></a>
 
-The database setup script only creates the MacPatch database and the 2 database accounts needed to use the database. Tuning the MySQL server is out of scope for this document.
+The database setup script only creates the MacPatch database and the account needed to use the database. It also does some basic database configuration. Tuning the MySQL server is out of scope for this document.
 
-Please remeber the passwords for mpdbadm and mpdbro accounts while running this script. They will be required during the SetupServer.py script database section.
+The database script is a sql script. This file will need to be run by the MySQL database root account or an account that has the Grant option. 
+
+Please edit the file, by setting the correct variable values for your MacPatch environment. On a standard build, only the default database account (mpdbadm) password needs to be set. Please remeber the mysql account name and password as it will be needed during the server setup.
+
+It's strongly recommended that you delete the sql script once run. The file won't be needed again. Or, at the very least, remove the account password that was set. 
 
 		cd /opt/MacPatch/Server/conf/scripts/setup
-		./MPDBSetup.sh (must be run on the MySQL server)
-
-**Note:** The MPDBSetup.sh ***can be/should be*** copied to another host if the database exists on a seperate server.
+		MPDBSetup.sql (must be run on the MySQL server)
 
 ##### Configure Server Software <a name='a3d'></a>
 
@@ -107,17 +87,22 @@ Please remeber the passwords for mpdbadm and mpdbro accounts while running this 
 ##### Configure MacPatch schema & populate default data <a name='a3f'></a>
 
 		cd /opt/MacPatch/Server/apps
-		source ../env/api/bin/activate
-		./mpapi.py db upgrade head
-		./mpapi.py populate_db
+		source ../env/console/bin/activate
+		flask db upgrade head
+		/opt/MacPatch/Server/apps/mpsetup.py --populate-db
 		deactivate
 
-**Note:** If "mpapi.py db upgrade head" is done using a root shell. Please delete the "/opt/MacPatch/Server/logs/mpwsapi.log" file. It will be owned by root and the REST api will not launch.
+**Note:** If "flask db upgrade head" is done using a root shell. Please delete the "/opt/MacPatch/Server/logs/mpconsole.log" file. It will be owned by root and the REST api will not launch.
 
-##### Start Services
+##### Start Configured Services
 
 		cd /opt/MacPatch/Server/conf/scripts/setup
-		sudo ./ServerSetup.py --load All
+		sudo ./ServerSetup.py --service All --action start
+
+##### Stop Configured Services
+
+		cd /opt/MacPatch/Server/conf/scripts/setup
+		sudo ./ServerSetup.py --service All --action stop
 
 --
 

@@ -1,5 +1,5 @@
-site_name: MacPatch v3.3
-pages:
+site_name: MacPatch v3.8.x
+nav:
     - Home: index.md
     - Installation:
         - Server Install & Setup: server_install.md
