@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="img/favicon.ico" />
-    <title>Groups - MacPatch v3.8.x</title>
+    <title>Provisioning - MacPatch v3.8.x</title>
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Groups";
-        var mkdocs_page_input_path = "sw_groups.md";
+        var mkdocs_page_name = "Provisioning";
+        var mkdocs_page_input_path = "provisioning.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -65,11 +65,9 @@
                 </li>
     </ul>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" >Software</a>
-    <ul class="current">
-                <li class="toctree-l2 current"><a class="reference internal current" href="#">Groups</a>
-    <ul class="current">
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" >Software</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="sw_groups.html">Groups</a>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" href="sw_tasks.html">Tasks</a>
                 </li>
@@ -83,7 +81,9 @@
                 </li>
     </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="provisioning.html">Provisioning</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Provisioning</a>
+    <ul class="current">
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">About</span></p>
@@ -106,8 +106,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html" class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Admin Console</li>
-          <li class="breadcrumb-item">Software</li>
-      <li class="breadcrumb-item active">Groups</li>
+      <li class="breadcrumb-item active">Provisioning</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -116,13 +115,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h3 id="in-progress">In Progress</h3>
+                <p>Provisioning in MacPatch is workflow that can setup a system to have software and patches and patches installed on first login. Data can also be collected and written to the file system for inventory collection.</p>
+<p>The workflow is a simple process. </p>
+<ul>
+<li><a href="#a1">Detection Criteria</a></li>
+<li><a href="#a2">Scripts</a></li>
+<li><a href="#a3">Software</a></li>
+<li><a href="#a4">UI Config</a></li>
+</ul>
+<h4 id="detection-criteria">Detection Criteria <a name='a1'></a></h4>
+<p>1) Create a detection criteria task.</p>
+<p><a href="images/content/provision/criteria.png"><img alt="" src="images/content/provision/criteria.png" /></a></p>
+<h4 id="scripts">Scripts <a name='a2'></a></h4>
+<p>2) Create provisioning scripts. This is optional but you have the ability to run a script in the following scenarios. Provisioning scripts, have three types - Pre, Post and Finish. The Pre and Post scripts will run before required software and after required software has been installed. The Finish script will run after all UI tasks have been completed. </p>
+<p><a href="images/content/provision/script.png"><img alt="" src="images/content/provision/script.png" /></a></p>
+<h4 id="software">Software <a name='a3'></a></h4>
+<p>3) Assign mandatory software tasks to be installed. Please note, a provision software task is reference to a normal software task.</p>
+<p><a href="images/content/provision/software.png"><img alt="" src="images/content/provision/software.png" /></a></p>
+<h4 id="ui-config">UI Config <a name='a4'></a></h4>
+<p>4) Create UI Config json file. (In Progress)</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="patch_groups.html" class="btn btn-neutral float-left" title="Patch Groups"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="sw_tasks.html" class="btn btn-neutral float-right" title="Tasks">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="sw_restrictions.html" class="btn btn-neutral float-left" title="Software Restrictions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -145,10 +161,8 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="patch_groups.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="sw_restrictions.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-    
-      <span><a href="sw_tasks.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
